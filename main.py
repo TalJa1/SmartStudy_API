@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
-    title="FastAPI with SQLite For SmartStudyPlaner app",
+    title="FastAPI with SQLite For SmartStudy app",
     description="This is a very fancy project, with auto docs for the API",
     version="0.1.0",
 )
