@@ -119,11 +119,11 @@ INSERT INTO Goals (user_id, title, description, end_date, is_completed) VALUES
 
 -- Bảng Tasks
 INSERT INTO Tasks (goal_id, user_id, title, subject, due_date, priority, status) VALUES
-(1, 1, 'Hoàn thành Module Cơ bản Python', 'Python', '2025-04-20', 1, 'Đang thực hiện'),
-(1, 1, 'Luyện tập Bài tập Python', 'Toán học', '2025-04-25', 2, 'Cần làm'),
+(1, 1, 'Hoàn thành Module Cơ bản Python', 'Python', '2025-04-20', 1, 'Đang làm'),
+(1, 1, 'Luyện tập Bài tập Python', 'Toán học', '2025-04-25', 2, 'Quá hạn'),
 (2, 2, 'Lên kế hoạch Cấu trúc Website', 'Thiết kế Web', '2025-04-25', 1, 'Hoàn thành'),
-(2, 2, 'Thiết kế Bản nháp Trang chủ', 'Giao diện người dùng', '2025-05-05', 1, 'Cần làm'),
-(3, 1, 'Đọc "Sapiens"', 'Lịch sử', '2025-05-15', 3, 'Đang thực hiện');
+(2, 2, 'Thiết kế Bản nháp Trang chủ', 'Giao diện người dùng', '2025-05-05', 1, 'Đang làm'),
+(3, 1, 'Đọc "Sapiens"', 'Lịch sử', '2025-05-15', 3, 'Đang làm');
 
 -- Bảng Pomodoro Sessions (Chế độ Pomodoro)
 INSERT INTO PomodoroSessions (task_id, user_id, start_time, end_time, duration_seconds, type) VALUES
