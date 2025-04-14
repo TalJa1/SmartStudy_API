@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean
 from database import Base
 from datetime import datetime
+from sqlalchemy.sql import func
 
 router = APIRouter()
 
@@ -68,6 +69,20 @@ async def read_task(task_id: int, db: AsyncSession = Depends(get_db)):
     if task is None:
         raise HTTPException(status_code=404, detail="Task not found")
     return task
+
+
+@router.get("/tasks/due_date/{due_date}")
+async def read_tasks_by_due_date(
+    due_date: datetime, db: AsyncSession = Depends(get_db)  # Keep type hint as datetime
+):
+    due_date_date_only = due_date.date()  # Extract date part
+    result = await db.execute(
+        select(Task).where(
+            func.date(Task.due_date) == due_date_date_only
+        )  # Compare with date object
+    )
+    tasks = result.scalars().all()
+    return tasks
 
 
 @router.put("/tasks/{task_id}")
