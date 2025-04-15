@@ -15,10 +15,10 @@ class Task(Base):
     __tablename__ = "tasks"
 
     task_id = Column(Integer, primary_key=True, index=True)
-    goal_id = Column(Integer, ForeignKey("goals.goal_id"), nullable=True)
     user_id = Column(Integer, ForeignKey("users.user_id"), nullable=False)
     title = Column(String, nullable=False)
     subject = Column(String, nullable=True)
+    description = Column(String, nullable=True)  # New field added
     due_date = Column(DateTime, nullable=True)
     priority = Column(Integer, default=3)
     status = Column(String, default="To Do")
@@ -27,10 +27,10 @@ class Task(Base):
 
 
 class TaskCreate(BaseModel):
-    goal_id: int | None
     user_id: int
     title: str
     subject: str | None
+    description: str | None  # New field added
     due_date: datetime | None
     priority: int | None
     status: str | None
@@ -39,10 +39,10 @@ class TaskCreate(BaseModel):
 @router.post("/tasks/")
 async def create_task(task: TaskCreate, db: AsyncSession = Depends(get_db)):
     new_task = Task(
-        goal_id=task.goal_id,
         user_id=task.user_id,
         title=task.title,
         subject=task.subject,
+        description=task.description,  # New field added
         due_date=task.due_date,
         priority=task.priority or 3,
         status=task.status or "To Do",
@@ -94,10 +94,10 @@ async def update_task(
     if existing_task is None:
         raise HTTPException(status_code=404, detail="Task not found")
 
-    existing_task.goal_id = task.goal_id
     existing_task.user_id = task.user_id
     existing_task.title = task.title
     existing_task.subject = task.subject
+    existing_task.description = task.description  # New field updated
     existing_task.due_date = task.due_date
     existing_task.priority = task.priority or existing_task.priority
     existing_task.status = task.status or existing_task.status

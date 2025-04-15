@@ -1,13 +1,11 @@
 -- SQLite Script to Handle Features (Without AI Tables)
 DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS Goals;
 DROP TABLE IF EXISTS Tasks;
 DROP TABLE IF EXISTS PomodoroSessions;
 DROP TABLE IF EXISTS Streaks;
 DROP TABLE IF EXISTS Achievements;
 DROP TABLE IF EXISTS CommunityPosts;
 DROP TABLE IF EXISTS CommunityComments;
-
 
 -- Table for User Profiles
 CREATE TABLE IF NOT EXISTS Users (
@@ -19,31 +17,18 @@ CREATE TABLE IF NOT EXISTS Users (
     registration_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- Table for Goals (Mục tiêu)
-CREATE TABLE IF NOT EXISTS Goals (
-    goal_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    title TEXT NOT NULL,
-    description TEXT,
-    start_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    end_date DATETIME,
-    is_completed BOOLEAN DEFAULT 0,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
-);
-
 -- Table for Tasks
 CREATE TABLE IF NOT EXISTS Tasks (
     task_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    goal_id INTEGER,
     user_id INTEGER NOT NULL,
     title TEXT NOT NULL,
     subject TEXT, -- Changed from description to subject
+    description TEXT, -- Added a new column 'description' to store additional details about tasks
     due_date DATETIME,
     priority INTEGER DEFAULT 3, -- e.g., 1: High, 2: Medium, 3: Low
     status TEXT DEFAULT 'To Do', -- e.g., 'To Do', 'In Progress', 'Done', 'Cancelled'
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (goal_id) REFERENCES Goals(goal_id),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
@@ -112,19 +97,13 @@ INSERT INTO Users (username, email, password) VALUES
 ('charlie_coder', 'charlie@example.com', 'hashed_password_charlie'),
 ('Phuc Nguyen', 'phucnguyen@example.com', 'phucnguyen123');
 
--- Bảng Goals (Mục tiêu)
-INSERT INTO Goals (user_id, title, description, end_date, is_completed) VALUES
-(1, 'Học Python', 'Hoàn thành một khóa học Python trực tuyến', '2025-05-30', 0),
-(2, 'Xây dựng Website Portfolio', 'Tạo một trang web cá nhân để giới thiệu dự án', '2025-06-15', 0),
-(1, 'Đọc 10 Cuốn Sách', 'Đọc 10 cuốn sách phi hư cấu trong năm nay', '2025-12-31', 0);
-
 -- Bảng Tasks
-INSERT INTO Tasks (goal_id, user_id, title, subject, due_date, priority, status) VALUES
-(1, 1, 'Hoàn thành Module Cơ bản Python', 'Python', '2025-04-20', 1, 'Đang làm'),
-(1, 1, 'Luyện tập Bài tập Python', 'Toán học', '2025-04-25', 2, 'Quá hạn'),
-(2, 2, 'Lên kế hoạch Cấu trúc Website', 'Thiết kế Web', '2025-04-25', 1, 'Hoàn thành'),
-(2, 2, 'Thiết kế Bản nháp Trang chủ', 'Giao diện người dùng', '2025-05-05', 1, 'Đang làm'),
-(3, 1, 'Đọc "Sapiens"', 'Lịch sử', '2025-05-15', 3, 'Đang làm');
+INSERT INTO Tasks (user_id, title, subject, description, due_date, priority, status) VALUES
+(1, 'Hoàn thành Module Cơ bản Python', 'Python', NULL, '2025-04-20', 1, 'Đang làm'),
+(1, 'Luyện tập Bài tập Python', 'Toán học', NULL, '2025-04-25', 2, 'Quá hạn'),
+(2, 'Lên kế hoạch Cấu trúc Website', 'Thiết kế Web', NULL, '2025-04-25', 1, 'Hoàn thành'),
+(2, 'Thiết kế Bản nháp Trang chủ', 'Giao diện người dùng', NULL, '2025-05-05', 1, 'Đang làm'),
+(1, 'Đọc "Sapiens"', 'Lịch sử', NULL, '2025-05-15', 3, 'Đang làm');
 
 -- Bảng Pomodoro Sessions (Chế độ Pomodoro)
 INSERT INTO PomodoroSessions (task_id, user_id, start_time, end_time, duration_seconds, type) VALUES
