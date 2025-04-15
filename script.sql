@@ -109,7 +109,8 @@ CREATE TABLE IF NOT EXISTS CommunityComments (
 INSERT INTO Users (username, email, password) VALUES
 ('alice123', 'alice@example.com', 'hashed_password_alice'), -- Remember to hash passwords in a real application
 ('bob.builder', 'bob@example.com', 'hashed_password_bob'),
-('charlie_coder', 'charlie@example.com', 'hashed_password_charlie');
+('charlie_coder', 'charlie@example.com', 'hashed_password_charlie'),
+('Phuc Nguyen', 'phucnguyen@example.com', 'phucnguyen123');
 
 -- Bảng Goals (Mục tiêu)
 INSERT INTO Goals (user_id, title, description, end_date, is_completed) VALUES
