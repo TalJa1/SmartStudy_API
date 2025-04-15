@@ -99,10 +99,10 @@ INSERT INTO Users (username, email, password) VALUES
 
 -- Bảng Tasks
 INSERT INTO Tasks (user_id, title, subject, description, due_date, priority, status) VALUES
-(1, 'Hoàn thành Module Cơ bản Python', 'Python', NULL, '2025-04-20', 1, 'Đang làm'),
-(1, 'Luyện tập Bài tập Python', 'Toán học', NULL, '2025-04-25', 2, 'Quá hạn'),
-(2, 'Lên kế hoạch Cấu trúc Website', 'Thiết kế Web', NULL, '2025-04-25', 1, 'Hoàn thành'),
-(2, 'Thiết kế Bản nháp Trang chủ', 'Giao diện người dùng', NULL, '2025-05-05', 1, 'Đang làm'),
+(1, 'Hoàn thành Module Cơ bản', 'Văn', NULL, '2025-04-20', 1, 'Đang làm'),
+(1, 'Luyện tập Bài tập Python', 'Toán', NULL, '2025-04-25', 2, 'Quá hạn'),
+(2, 'Lên kế hoạch Cấu trúc', 'Vật Lý', NULL, '2025-04-25', 1, 'Hoàn thành'),
+(2, 'Thiết kế Bản nháp', 'Hóa Học', NULL, '2025-05-05', 1, 'Đang làm'),
 (1, 'Đọc "Sapiens"', 'Lịch sử', NULL, '2025-05-15', 3, 'Đang làm');
 
 -- Bảng Pomodoro Sessions (Chế độ Pomodoro)
