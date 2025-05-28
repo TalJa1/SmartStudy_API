@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  smartstudy-api:
+    build: .
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/app
